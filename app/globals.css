@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-background text-white antialiased;
+}
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+a {
+  @apply text-accent underline-offset-4 transition-colors;
+}
+
+a:hover {
+  @apply text-accent-soft;
+}
+
+.container-default {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-padding {
+  @apply py-12 sm:py-16 lg:py-20;
+}
+
+.card-surface {
+  @apply rounded-2xl border border-white/5 bg-gradient-to-b from-white/5 to-white/0 shadow-card-soft;
+}
+
+.grid-responsive-3 {
+  @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
+}
+
