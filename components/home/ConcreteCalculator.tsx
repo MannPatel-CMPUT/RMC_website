@@ -39,7 +39,7 @@ export function ConcreteCalculator() {
   };
 
   return (
-    <section className="section-padding bg-gradient-to-b from-black/80 to-black">
+    <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
       <div className="container-default">
         <SectionHeading
           eyebrow="Concrete Calculator"
@@ -48,7 +48,7 @@ export function ConcreteCalculator() {
           align="left"
         />
         <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
-          <Card className="space-y-6 border-accent/30 bg-gradient-to-b from-white/[0.04] to-black/80">
+          <Card className="space-y-6 border-zinc-300 bg-white">
             <div className="grid gap-4 sm:grid-cols-3">
               <TextField
                 label="Length (mm)"
@@ -82,38 +82,38 @@ export function ConcreteCalculator() {
               </Button>
               {volume !== null && (
                 <div className="text-right">
-                  <p className="text-xs font-medium text-gray-400">
+                  <p className="text-xs font-medium text-zinc-500">
                     Estimated Volume
                   </p>
-                  <p className="text-2xl font-semibold text-accent">
+                  <p className="text-2xl font-semibold text-zinc-900">
                     {volume} m³
                   </p>
                 </div>
               )}
             </div>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-zinc-500">
               This tool is indicative only. Final concrete quantities, wastage and
               pumping requirements should be vetted by your structural and project
               consultants.
             </p>
           </Card>
           <div className="space-y-4">
-            <Card className="space-y-3 border-white/10 bg-white/[0.03]">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
+            <Card className="space-y-3 border-zinc-200 bg-white">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-700">
                 Typical use cases
               </h3>
-              <ul className="list-disc space-y-1 pl-4 text-sm text-gray-300">
+              <ul className="list-disc space-y-1 pl-4 text-sm text-zinc-700">
                 <li>Industrial floors and warehouse slabs</li>
                 <li>Machine foundations and pedestals</li>
                 <li>Roads, pavements and service yards</li>
                 <li>Retaining walls and core walls</li>
               </ul>
             </Card>
-            <Card className="space-y-2 border-white/10 bg-white/[0.03]">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-300">
+            <Card className="space-y-2 border-zinc-200 bg-white">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-700">
                 Need assistance?
               </h3>
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-zinc-700">
                 Share your drawings or BOQ with our team and we can assist with RMC
                 grade selection and pour planning for your project in Vadodara region.
               </p>

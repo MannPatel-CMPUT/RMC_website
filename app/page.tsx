@@ -51,7 +51,7 @@ export default function HomePage() {
       <Hero />
 
       {/* Trust stats band */}
-      <section className="border-y border-white/5 bg-black/80 py-8">
+      <section className="border-y border-zinc-200 bg-zinc-100 py-8">
         <div className="container-default grid gap-4 md:grid-cols-3 lg:grid-cols-6">
           {[
             { label: "Since 2011", value: "Established RMC Supplier" },
@@ -67,7 +67,7 @@ export default function HomePage() {
       </section>
 
       {/* About snapshot */}
-      <section className="section-padding bg-black/90">
+      <section className="section-padding bg-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)] lg:items-center">
           <div className="space-y-6">
             <SectionHeading
@@ -75,7 +75,7 @@ export default function HomePage() {
               title="Perfect Ready Mix Concrete – an established partner for Gujarat projects"
               subtitle={businessDescription}
             />
-            <p className="text-sm text-gray-200">
+            <p className="text-sm text-zinc-700">
               We primarily serve industrial, commercial and infrastructure projects in
               and around Vadodara, Waghodia and nearby industrial areas, supporting EPC
               contractors, project management teams and corporate procurement.
@@ -87,16 +87,16 @@ export default function HomePage() {
               Learn more about our company
             </a>
           </div>
-          <Card className="space-y-4 border-accent/30 bg-gradient-to-b from-primary/20 to-black/80">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          <Card className="space-y-4 border-zinc-300 bg-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-900">
               Industrial & Infrastructure Focus
             </p>
-            <p className="text-sm text-gray-100">
+            <p className="text-sm text-zinc-700">
               Since 2011, Perfect Ready Mix Concrete has been supplying IS:4926 compliant
               RMC for industrial units, logistics hubs, pharma facilities and
               infrastructure corridors across the Vadodara region.
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-zinc-500">
               A combination of modern plant infrastructure, disciplined QA/QC and
               practical on-ground experience makes us a dependable partner for
               time-bound, quality-sensitive pours.
@@ -106,7 +106,7 @@ export default function HomePage() {
       </section>
 
       {/* Services */}
-      <section className="section-padding bg-gradient-to-b from-black/90 to-background">
+      <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
         <div className="container-default">
           <SectionHeading
             eyebrow="Services"
@@ -117,15 +117,15 @@ export default function HomePage() {
             {services.map((service) => (
               <Card
                 key={service.title}
-                className="flex flex-col justify-between border-white/10 bg-white/[0.03] pb-5 pt-6"
+                className="flex flex-col justify-between border-zinc-200 bg-white pb-5 pt-6"
               >
                 <div className="space-y-3">
                   <div className="h-8 w-8 rounded-full bg-accent/15" aria-hidden="true" />
                   <div className="space-y-1">
-                    <h3 className="text-sm font-semibold text-white">
+                    <h3 className="text-sm font-semibold text-zinc-900">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-gray-300">{service.description}</p>
+                    <p className="text-sm text-zinc-700">{service.description}</p>
                   </div>
                 </div>
               </Card>
@@ -135,7 +135,7 @@ export default function HomePage() {
       </section>
 
       {/* Infrastructure highlight */}
-      <section className="section-padding bg-black/90">
+      <section className="section-padding bg-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div>
             <SectionHeading
@@ -147,28 +147,28 @@ export default function HomePage() {
               {infrastructureStats.map((stat) => (
                 <Card
                   key={stat.label}
-                  className="space-y-1 border-white/10 bg-gradient-to-b from-white/5 to-black/60"
+                  className="space-y-1 border-zinc-200 bg-white"
                 >
-                  <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">
                     {stat.label}
                   </p>
-                  <p className="text-sm font-semibold text-white">{stat.value}</p>
+                  <p className="text-sm font-semibold text-zinc-900">{stat.value}</p>
                 </Card>
               ))}
             </div>
           </div>
           <div className="space-y-4">
-            <Card className="space-y-2 border-white/10">
-              <h3 className="text-sm font-semibold text-white">Operational capability</h3>
-              <p className="text-sm text-gray-300">
+            <Card className="space-y-2 border-zinc-200">
+              <h3 className="text-sm font-semibold text-zinc-900">Operational capability</h3>
+              <p className="text-sm text-zinc-700">
                 Our plant and fleet are planned for continuous pours and tight timelines,
                 with structured scheduling, power backup and on-ground supervisors
                 coordinating with your site team.
               </p>
             </Card>
-            <Card className="space-y-2 border-white/10">
-              <h3 className="text-sm font-semibold text-white">Modern plant operations</h3>
-              <p className="text-sm text-gray-300">
+            <Card className="space-y-2 border-zinc-200">
+              <h3 className="text-sm font-semibold text-zinc-900">Modern plant operations</h3>
+              <p className="text-sm text-zinc-700">
                 From raw material handling to batching and dispatch, our operations are
                 aligned with best practices for industrial ready mix concrete
                 production.
@@ -179,7 +179,7 @@ export default function HomePage() {
       </section>
 
       {/* Quality assurance process */}
-      <section className="section-padding bg-gradient-to-b from-background to-black/80">
+      <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div>
             <SectionHeading
@@ -187,7 +187,7 @@ export default function HomePage() {
               title="Structured QA/QC process for every cubic meter"
               subtitle="Engineered mixes, calibrated batching and documented testing aligned with IS:4926 guidelines."
             />
-            <ol className="space-y-3 text-sm text-gray-200">
+            <ol className="space-y-3 text-sm text-zinc-700">
               {qualityProcessSteps.map((step, index) => (
                 <li key={step} className="flex gap-3">
                   <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-accent/20 text-[11px] font-semibold text-accent">
@@ -198,14 +198,14 @@ export default function HomePage() {
               ))}
             </ol>
           </div>
-          <Card className="space-y-3 border-accent/30 bg-black/70">
-            <h3 className="text-sm font-semibold text-white">Why quality matters</h3>
-            <p className="text-sm text-gray-300">
+            <Card className="space-y-3 border-zinc-300 bg-white">
+            <h3 className="text-sm font-semibold text-zinc-900">Why quality matters</h3>
+            <p className="text-sm text-zinc-700">
               Concrete performance directly impacts lifecycle cost, safety and service
               life of your structure. Our QA/QC process is built to give consultants and
               project owners confidence in strength, durability and consistency.
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-zinc-500">
               From supplier certificates and calibration records to on-site cube
               testing, we maintain documentation that supports compliance and
               traceability for industrial and infrastructure audits.
@@ -221,7 +221,7 @@ export default function HomePage() {
       <ConcreteCalculator />
 
       {/* Lead capture */}
-      <section className="section-padding bg-black/95">
+      <section className="section-padding bg-zinc-100">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)] lg:items-start">
           <div className="space-y-4">
             <SectionHeading
@@ -229,11 +229,11 @@ export default function HomePage() {
               title="Share your project requirement"
               subtitle="Provide core details such as location, approximate quantities and timelines, and our team will respond with a structured ready mix concrete proposal."
             />
-            <Card className="space-y-2 border-accent/30 bg-accent/5">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <Card className="space-y-2 border-zinc-300 bg-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-900">
                 Why clients choose us
               </p>
-              <ul className="list-disc space-y-1 pl-4 text-xs text-gray-200">
+              <ul className="list-disc space-y-1 pl-4 text-xs text-zinc-700">
                 <li>Since 2011 – established regional RMC supplier</li>
                 <li>Modern plant with 60 m³/hr capacity</li>
                 <li>10 transit mixers and 2 static pumps</li>

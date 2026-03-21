@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en">
-      <body className="relative min-h-screen bg-background text-white">
+      <body className="relative min-h-screen bg-zinc-100 text-zinc-900">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}

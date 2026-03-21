@@ -3,9 +3,10 @@ export const COMPANY_NAME = "Perfect Ready Mix Concrete";
 export const SITE_ORIGIN = "https://www.perfectreadymix.in";
 
 export const CONTACT = {
-  phoneDisplay: "+91 98765 43210",
-  phoneHref: "+919876543210",
-  email: "sales@perfectreadymix.in"
+  /** Primary line for calls (same as WhatsApp line for manager contact). */
+  phoneDisplay: "+91 82550 09999",
+  phoneHref: "+918255009999",
+  email: "businesshead@perfectrmc.in"
 };
 
 export const ADDRESS = {
@@ -31,5 +32,10 @@ export const SOCIALS = {
   instagram: "#"
 };
 
-export const WHATSAPP_NUMBER = "+919876543210";
+/** E.164 — used with https://wa.me/918255009999 (no WhatsApp API; manual chat only). */
+export const WHATSAPP_NUMBER = "+918255009999";
+
+/** Optional prefilled message when opening WhatsApp from the site. */
+export const WHATSAPP_DEFAULT_TEXT =
+  "Hi Perfect RMC, I need a quote for ready mix concrete.";
 

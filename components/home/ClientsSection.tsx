@@ -3,7 +3,7 @@ import { SectionHeading, Card } from "@/components/ui/Primitives";
 
 export function ClientsSection() {
   return (
-    <section className="section-padding bg-gradient-to-b from-black/80 to-background">
+    <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
       <div className="container-default">
         <SectionHeading
           eyebrow="Clients & Projects"
@@ -15,15 +15,15 @@ export function ClientsSection() {
           {clients.map((client) => (
             <Card
               key={client}
-              className="flex items-center justify-between border-white/10 bg-white/[0.02]"
+              className="flex items-center justify-between border-zinc-200 bg-white"
             >
               <div>
-                <p className="text-sm font-semibold text-white">{client}</p>
-                <p className="text-xs text-gray-400">
+                <p className="text-sm font-semibold text-zinc-900">{client}</p>
+                <p className="text-xs text-zinc-500">
                   Industrial / Infrastructure Project Partner
                 </p>
               </div>
-              <div className="h-10 w-20 rounded bg-white/5" aria-hidden="true">
+              <div className="h-10 w-20 rounded bg-zinc-100" aria-hidden="true">
                 {/* client-logo-placeholder.svg */}
               </div>
             </Card>

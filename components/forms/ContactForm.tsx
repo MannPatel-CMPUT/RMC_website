@@ -25,6 +25,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
     "idle"
   );
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (field: keyof ContactFormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -54,8 +55,33 @@ export function ContactForm() {
     if (!validate()) return;
 
     setStatus("submitting");
+    setStatusMessage("");
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType: "contact",
+          data: {
+            name: form.name.trim(),
+            company: form.company.trim() || undefined,
+            phone: form.phone.replace(/\s+/g, ""),
+            email: form.email.trim(),
+            message: form.message.trim()
+          }
+        })
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error("Contact submit failed:", err);
+        setStatusMessage(
+          typeof err.error === "string"
+            ? err.error
+            : "Something went wrong. Please try again or call us directly."
+        );
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -115,7 +141,7 @@ export function ContactForm() {
           )}
           {status === "error" && (
             <p className="text-xs text-red-400">
-              Something went wrong. Please try again or call us directly.
+              {statusMessage || "Something went wrong. Please try again or call us directly."}
             </p>
           )}
         </div>

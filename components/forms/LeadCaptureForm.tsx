@@ -33,6 +33,7 @@ export function LeadCaptureForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
     "idle"
   );
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (field: keyof LeadFormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -63,9 +64,37 @@ export function LeadCaptureForm() {
     if (!validate()) return;
 
     setStatus("submitting");
+    setStatusMessage("");
     try {
-      // Placeholder submit – replace with real API route or CRM integration.
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType: "quote",
+          data: {
+            name: form.name.trim(),
+            company: form.company.trim(),
+            phone: form.phone.replace(/\s+/g, ""),
+            email: form.email.trim() || undefined,
+            location: form.location.trim(),
+            grade: form.grade.trim() || undefined,
+            quantity: form.quantity.trim(),
+            date: form.date.trim() || undefined,
+            message: form.message.trim() || undefined
+          }
+        })
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error("Lead submit failed:", err);
+        setStatusMessage(
+          typeof err.error === "string"
+            ? err.error
+            : "Something went wrong. Please try again or call our sales team."
+        );
+        setStatus("error");
+        return;
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -154,7 +183,7 @@ export function LeadCaptureForm() {
           )}
           {status === "error" && (
             <p className="text-xs text-red-400">
-              Something went wrong. Please try again or call our sales team.
+              {statusMessage || "Something went wrong. Please try again or call our sales team."}
             </p>
           )}
         </div>

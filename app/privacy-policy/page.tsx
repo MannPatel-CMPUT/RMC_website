@@ -16,8 +16,8 @@ export default function PrivacyPolicyPage() {
         title="How we handle your information"
         description="This summary privacy policy outlines how we handle basic contact and project information submitted through this website."
       />
-      <section className="section-padding bg-black/85">
-        <div className="container-default space-y-6 text-sm text-gray-200">
+      <section className="section-padding bg-zinc-100">
+        <div className="container-default space-y-6 text-sm text-zinc-700">
           <SectionHeading
             eyebrow="Overview"
             title="Information we collect"

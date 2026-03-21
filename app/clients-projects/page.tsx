@@ -41,7 +41,7 @@ export default function ClientsProjectsPage() {
         description="Perfect Ready Mix Concrete supports EPC contractors, industrial clients and infrastructure projects across Gujarat with dependable ready mix concrete supply."
       />
 
-      <section className="section-padding bg-black/80">
+      <section className="section-padding bg-zinc-100">
         <div className="container-default">
           <SectionHeading
             eyebrow="Key Clients"
@@ -52,15 +52,15 @@ export default function ClientsProjectsPage() {
             {clients.map((client) => (
               <Card
                 key={client}
-                className="flex items-center justify-between border-white/10 bg-white/[0.02]"
+                className="flex items-center justify-between border-zinc-200 bg-white"
               >
                 <div>
-                  <p className="text-sm font-semibold text-white">{client}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-sm font-semibold text-zinc-900">{client}</p>
+                  <p className="text-xs text-zinc-500">
                     Industrial / Infrastructure Client
                   </p>
                 </div>
-                <div className="h-10 w-20 rounded bg-white/5" aria-hidden="true">
+                <div className="h-10 w-20 rounded bg-zinc-100" aria-hidden="true">
                   {/* client-logo-placeholder.svg */}
                 </div>
               </Card>
@@ -69,7 +69,7 @@ export default function ClientsProjectsPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-b from-background to-black/80">
+      <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-2">
           <div>
             <SectionHeading
@@ -81,19 +81,19 @@ export default function ClientsProjectsPage() {
             {categories.map((category) => (
               <Card
                 key={category.title}
-                className="border-white/10 bg-gradient-to-b from-white/5 to-black/70"
+                className="border-zinc-200 bg-white"
               >
-                <p className="text-sm font-semibold text-white">{category.title}</p>
-                <p className="text-xs text-gray-300">{category.description}</p>
+                <p className="text-sm font-semibold text-zinc-900">{category.title}</p>
+                <p className="text-xs text-zinc-700">{category.description}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-black/90">
+      <section className="section-padding bg-zinc-50">
         <div className="container-default">
-          <div className="rounded-2xl border border-accent/30 bg-accent/5 px-6 py-8 sm:px-10">
+          <div className="rounded-2xl border border-zinc-300 bg-white px-6 py-8 sm:px-10">
             <SectionHeading
               eyebrow="Trusted by Leading Companies"
               title="Plan your next project with Perfect Ready Mix Concrete"
@@ -101,7 +101,7 @@ export default function ClientsProjectsPage() {
             />
             <a
               href="/request-quote"
-              className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-2.5 text-xs font-semibold uppercase tracking-wide text-background shadow-card-soft hover:bg-accent-soft"
+              className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2.5 text-xs font-semibold uppercase tracking-wide text-white shadow-card-soft hover:bg-zinc-700"
             >
               Request project-ready proposal
             </a>

@@ -16,8 +16,8 @@ export default function TermsPage() {
         title="Website and enquiry terms"
         description="This section provides a high-level template for terms and conditions related to website use and enquiry handling."
       />
-      <section className="section-padding bg-black/85">
-        <div className="container-default space-y-6 text-sm text-gray-200">
+      <section className="section-padding bg-zinc-100">
+        <div className="container-default space-y-6 text-sm text-zinc-700">
           <SectionHeading
             eyebrow="Scope"
             title="Use of this website"

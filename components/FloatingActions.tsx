@@ -1,10 +1,13 @@
-import { CONTACT, WHATSAPP_NUMBER } from "@/lib/siteConfig";
+import { CONTACT, WHATSAPP_DEFAULT_TEXT, WHATSAPP_NUMBER } from "@/lib/siteConfig";
+
+const waDigits = WHATSAPP_NUMBER.replace(/\D/g, "");
+const waHref = `https://wa.me/${waDigits}?text=${encodeURIComponent(WHATSAPP_DEFAULT_TEXT)}`;
 
 export function FloatingActions() {
   return (
     <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER.replace("+", "")}`}
+        href={waHref}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 rounded-full bg-green-500 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-card-soft hover:bg-green-400"

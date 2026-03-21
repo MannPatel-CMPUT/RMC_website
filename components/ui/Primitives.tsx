@@ -13,10 +13,10 @@ export function Button({
   const base =
     "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background";
   const variants: Record<typeof variant, string> = {
-    primary: "bg-accent text-background hover:bg-accent-soft",
+    primary: "bg-zinc-900 text-white hover:bg-zinc-700",
     outline:
-      "border border-white/20 bg-transparent text-gray-100 hover:border-accent hover:text-accent",
-    ghost: "bg-transparent text-gray-200 hover:text-white"
+      "border border-zinc-300 bg-white text-zinc-800 hover:border-zinc-500 hover:text-zinc-900",
+    ghost: "bg-transparent text-zinc-700 hover:text-zinc-900"
   };
   return (
     <button className={`${base} ${variants[variant]} ${className}`} {...props}>
@@ -50,7 +50,7 @@ export function SectionHeading({
       <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
         {title}
       </h2>
-      {subtitle && <p className="max-w-2xl text-sm text-gray-300">{subtitle}</p>}
+      {subtitle && <p className="max-w-2xl text-sm text-zinc-600">{subtitle}</p>}
     </div>
   );
 }
@@ -77,11 +77,11 @@ export function StatCard({
   value: string;
 }) {
   return (
-    <Card className="flex flex-col gap-2 border-white/10 bg-gradient-to-b from-primary/20 to-background/40">
-      <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+    <Card className="flex flex-col gap-2 border-zinc-300/70 bg-gradient-to-b from-white to-zinc-100">
+      <span className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
         {label}
       </span>
-      <span className="text-xl font-semibold text-white">{value}</span>
+      <span className="text-xl font-semibold text-zinc-900">{value}</span>
     </Card>
   );
 }
@@ -102,18 +102,18 @@ export function TextField({
 }: BaseFieldProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="space-y-1.5 text-sm">
-      <label className="flex items-center justify-between text-xs font-medium text-gray-200">
+      <label className="flex items-center justify-between text-xs font-medium text-zinc-700">
         <span>
           {label}
           {required && <span className="text-accent"> *</span>}
         </span>
       </label>
       <input
-        className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-accent focus:bg-black/50"
+        className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none ring-0 transition focus:border-zinc-500 focus:bg-white"
         {...props}
       />
       {helperText && !error && (
-        <p className="text-xs text-gray-400">{helperText}</p>
+        <p className="text-xs text-zinc-500">{helperText}</p>
       )}
       {error && <p className="text-xs text-red-400">{error}</p>}
     </div>
@@ -129,18 +129,18 @@ export function TextAreaField({
 }: BaseFieldProps & TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <div className="space-y-1.5 text-sm">
-      <label className="flex items-center justify-between text-xs font-medium text-gray-200">
+      <label className="flex items-center justify-between text-xs font-medium text-zinc-700">
         <span>
           {label}
           {required && <span className="text-accent"> *</span>}
         </span>
       </label>
       <textarea
-        className="min-h-[100px] w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none ring-0 transition focus:border-accent focus:bg-black/50"
+        className="min-h-[100px] w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none ring-0 transition focus:border-zinc-500 focus:bg-white"
         {...props}
       />
       {helperText && !error && (
-        <p className="text-xs text-gray-400">{helperText}</p>
+        <p className="text-xs text-zinc-500">{helperText}</p>
       )}
       {error && <p className="text-xs text-red-400">{error}</p>}
     </div>

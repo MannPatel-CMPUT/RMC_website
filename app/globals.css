@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply bg-background text-white antialiased;
+  @apply bg-zinc-100 text-zinc-900 antialiased;
 }
 
 body {
@@ -12,11 +12,11 @@ body {
 }
 
 a {
-  @apply text-accent underline-offset-4 transition-colors;
+  @apply text-zinc-800 underline-offset-4 transition-colors;
 }
 
 a:hover {
-  @apply text-accent-soft;
+  @apply text-zinc-900;
 }
 
 .container-default {
@@ -28,10 +28,90 @@ a:hover {
 }
 
 .card-surface {
-  @apply rounded-2xl border border-white/5 bg-gradient-to-b from-white/5 to-white/0 shadow-card-soft;
+  @apply rounded-2xl border border-zinc-200 bg-white shadow-card-soft;
 }
 
 .grid-responsive-3 {
   @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
 }
 
+/* -------------------------------------------------------------------------- */
+/* AnimatedMixerTruck — drum-only rotation, hover speed, reduced motion       */
+/* -------------------------------------------------------------------------- */
+
+.mixer-truck-root {
+  --mixer-drum-duration: 14s;
+  --mixer-drum-duration-hover: 9s;
+}
+
+.mixer-truck-shell {
+  transform-style: preserve-3d;
+  perspective: 880px;
+}
+
+.mixer-truck-tilt {
+  transform: rotateX(2deg);
+  transform-style: preserve-3d;
+}
+
+.mixer-truck-float {
+  animation: mixer-truck-float 5.5s ease-in-out infinite;
+}
+
+@keyframes mixer-truck-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.mixer-drum-spin-continuous {
+  animation: mixer-drum-rotate-z var(--mixer-drum-duration, 14s) linear infinite;
+}
+
+.mixer-truck-root:hover .mixer-drum-spin-continuous {
+  animation-duration: var(--mixer-drum-duration-hover, 9s);
+}
+
+.mixer-drum-spin-logo-pause {
+  animation: mixer-drum-logo-pause var(--mixer-drum-duration, 18s) linear infinite;
+}
+
+.mixer-truck-root:hover .mixer-drum-spin-logo-pause {
+  animation-duration: var(--mixer-drum-duration-hover, 12s);
+}
+
+@keyframes mixer-drum-rotate-z {
+  from {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+  to {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+@keyframes mixer-drum-logo-pause {
+  0% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+  38% {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+  100% {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mixer-truck-float {
+    animation: none !important;
+  }
+
+  .mixer-drum-spin-continuous,
+  .mixer-drum-spin-logo-pause {
+    animation: none !important;
+  }
+}

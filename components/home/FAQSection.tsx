@@ -8,7 +8,7 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="section-padding bg-black/70">
+    <section className="section-padding bg-zinc-100">
       <div className="container-default">
         <SectionHeading
           eyebrow="FAQ"
@@ -21,7 +21,7 @@ export function FAQSection() {
             return (
               <Card
                 key={item.question}
-                className="border-white/10 bg-white/[0.02] p-0"
+                className="border-zinc-200 bg-white p-0"
               >
                 <button
                   type="button"
@@ -29,18 +29,18 @@ export function FAQSection() {
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm font-semibold text-white">
+                  <span className="text-sm font-semibold text-zinc-900">
                     {item.question}
                   </span>
                   <span
-                    className="flex h-6 w-6 items-center justify-center rounded-full border border-white/15 text-xs text-gray-200"
+                    className="flex h-6 w-6 items-center justify-center rounded-full border border-zinc-300 text-xs text-zinc-600"
                     aria-hidden="true"
                   >
                     {isOpen ? "−" : "+"}
                   </span>
                 </button>
                 {isOpen && (
-                  <div className="border-t border-white/10 px-5 py-3 text-sm text-gray-300">
+                  <div className="border-t border-zinc-200 px-5 py-3 text-sm text-zinc-700">
                     {item.answer}
                   </div>
                 )}

@@ -27,7 +27,7 @@ export default function InfrastructurePage() {
         description="Our infrastructure is configured to support time-bound pours, continuous supply and documented quality control for industrial, commercial and infrastructure projects across Gujarat."
       />
 
-      <section className="section-padding bg-black/80">
+      <section className="section-padding bg-zinc-100">
         <div className="container-default">
           <SectionHeading
             eyebrow="Key Statistics"
@@ -41,7 +41,7 @@ export default function InfrastructurePage() {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-b from-background to-black/80">
+      <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div>
             <SectionHeading
@@ -53,26 +53,26 @@ export default function InfrastructurePage() {
               {equipment.map((item) => (
                 <Card
                   key={item.name}
-                  className="border-white/10 bg-white/[0.03]"
+                  className="border-zinc-200 bg-white"
                 >
-                  <p className="text-sm font-semibold text-white">{item.name}</p>
-                  <p className="text-xs text-gray-300">{item.detail}</p>
+                  <p className="text-sm font-semibold text-zinc-900">{item.name}</p>
+                  <p className="text-xs text-zinc-600">{item.detail}</p>
                 </Card>
               ))}
             </div>
           </div>
           <div className="space-y-4">
-            <Card className="h-40 border-dashed border-white/15">
+            <Card className="h-40 border-dashed border-zinc-300">
               <p className="text-xs text-gray-500">
                 Image placeholder – batching plant (`plant-1.jpg`)
               </p>
             </Card>
-            <Card className="h-40 border-dashed border-white/15">
+            <Card className="h-40 border-dashed border-zinc-300">
               <p className="text-xs text-gray-500">
                 Image placeholder – transit mixers (`mixer-truck-1.jpg`)
               </p>
             </Card>
-            <Card className="h-40 border-dashed border-white/15">
+            <Card className="h-40 border-dashed border-zinc-300">
               <p className="text-xs text-gray-500">
                 Image placeholder – QA/QC lab (`qa-lab-1.jpg`)
               </p>
@@ -81,7 +81,7 @@ export default function InfrastructurePage() {
         </div>
       </section>
 
-      <section className="section-padding bg-black/90">
+      <section className="section-padding bg-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-2">
           <div>
             <SectionHeading
@@ -90,9 +90,9 @@ export default function InfrastructurePage() {
               subtitle="Our team and equipment are structured to coordinate with your project schedule, including night pours and critical path activities, subject to planning."
             />
           </div>
-          <Card className="space-y-2 border-white/10">
-            <h3 className="text-sm font-semibold text-white">How we support uptime</h3>
-            <ul className="list-disc space-y-1 pl-4 text-sm text-gray-300">
+          <Card className="space-y-2 border-zinc-200">
+            <h3 className="text-sm font-semibold text-zinc-900">How we support uptime</h3>
+            <ul className="list-disc space-y-1 pl-4 text-sm text-zinc-700">
               <li>Preventive maintenance for plant and fleet</li>
               <li>Power backup to reduce downtime risk</li>
               <li>Experienced operators and on-ground supervisors</li>
