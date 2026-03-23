@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button, TextAreaField, TextField, Card } from "@/components/ui/Primitives";
+import { WHATSAPP_NUMBER } from "@/lib/siteConfig";
 
 type LeadFormState = {
   name: string;
@@ -30,10 +31,10 @@ export function LeadCaptureForm() {
     message: ""
   });
   const [errors, setErrors] = useState<LeadFormErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
-    "idle"
-  );
-  const [statusMessage, setStatusMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const waDigits = WHATSAPP_NUMBER.replace(/\D/g, "");
+  const [whatsappUrl, setWhatsappUrl] = useState<string>("");
 
   const handleChange = (field: keyof LeadFormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -64,41 +65,41 @@ export function LeadCaptureForm() {
     if (!validate()) return;
 
     setStatus("submitting");
-    setStatusMessage("");
+
+    const cleanPhone = form.phone.replace(/\s+/g, "");
+    const cleanEmail = form.email.trim();
+
+    const whatsappMessageParts: Array<string | null> = [
+      "Hi Perfect RMC, I would like a quote.",
+      "",
+      `Name: ${form.name.trim()}`,
+      `Phone: ${cleanPhone}`,
+      cleanEmail ? `Email: ${cleanEmail}` : null,
+      "Project Type: Ready Mix Concrete (RMC)",
+      `Concrete Requirement: Grade ${form.grade.trim() || "—"} · Qty ${form.quantity.trim()} m³`,
+      `Location: ${form.location.trim()}`,
+      `Preferred Date: ${form.date.trim() || "—"}`,
+      `Additional Details: ${form.message.trim() || "—"}`,
+      "",
+      "Please contact me regarding this inquiry."
+    ];
+
+    const whatsappMessage = whatsappMessageParts.filter(Boolean).join("\n");
+    const nextWhatsappUrl = `https://wa.me/${waDigits}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
+    // Open WhatsApp in a new tab; if blocked, user can still click the link below.
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formType: "quote",
-          data: {
-            name: form.name.trim(),
-            company: form.company.trim(),
-            phone: form.phone.replace(/\s+/g, ""),
-            email: form.email.trim() || undefined,
-            location: form.location.trim(),
-            grade: form.grade.trim() || undefined,
-            quantity: form.quantity.trim(),
-            date: form.date.trim() || undefined,
-            message: form.message.trim() || undefined
-          }
-        })
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        console.error("Lead submit failed:", err);
-        setStatusMessage(
-          typeof err.error === "string"
-            ? err.error
-            : "Something went wrong. Please try again or call our sales team."
-        );
-        setStatus("error");
-        return;
+      if (typeof window !== "undefined") {
+        window.open(nextWhatsappUrl, "_blank", "noopener,noreferrer");
       }
-      setStatus("success");
     } catch {
-      setStatus("error");
+      // If window.open fails (popup blocker), the user still has the WhatsApp link.
     }
+
+    setWhatsappUrl(nextWhatsappUrl);
+    setStatus("success");
   };
 
   return (
@@ -177,13 +178,17 @@ export function LeadCaptureForm() {
             {status === "submitting" ? "Submitting..." : "Submit Inquiry"}
           </Button>
           {status === "success" && (
-            <p className="text-xs text-emerald-400">
-              Thank you. Our team will contact you shortly with next steps.
-            </p>
-          )}
-          {status === "error" && (
-            <p className="text-xs text-red-400">
-              {statusMessage || "Something went wrong. Please try again or call our sales team."}
+            <p className="text-xs text-emerald-700">
+              Continue on WhatsApp to send your request to Perfect RMC.
+              <br />
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline underline-offset-4"
+              >
+                Open WhatsApp
+              </a>
             </p>
           )}
         </div>

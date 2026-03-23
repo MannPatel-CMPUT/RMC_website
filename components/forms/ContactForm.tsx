@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button, TextAreaField, TextField, Card } from "@/components/ui/Primitives";
+import { WHATSAPP_NUMBER } from "@/lib/siteConfig";
 
 type ContactFormState = {
   name: string;
@@ -22,10 +23,9 @@ export function ContactForm() {
     message: ""
   });
   const [errors, setErrors] = useState<ContactFormErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
-    "idle"
-  );
-  const [statusMessage, setStatusMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const waDigits = WHATSAPP_NUMBER.replace(/\D/g, "");
+  const [whatsappUrl, setWhatsappUrl] = useState<string>("");
 
   const handleChange = (field: keyof ContactFormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -55,37 +55,42 @@ export function ContactForm() {
     if (!validate()) return;
 
     setStatus("submitting");
-    setStatusMessage("");
+
+    const cleanPhone = form.phone.replace(/\s+/g, "");
+    const cleanEmail = form.email.trim();
+    const cleanCompany = form.company.trim();
+    const cleanMessage = form.message.trim();
+
+    const whatsappMessageParts: string[] = [
+      "Hi Perfect RMC, I would like a quote.",
+      "",
+      `Name: ${form.name.trim()}`,
+      `Phone: ${cleanPhone}`,
+      `Email: ${cleanEmail}`,
+      `Project Type: ${cleanCompany ? cleanCompany : "General Enquiry"}`,
+      "Concrete Requirement: —",
+      "Location: —",
+      "Preferred Date: —",
+      `Additional Details: ${cleanMessage || "—"}`,
+      "",
+      "Please contact me regarding this inquiry."
+    ];
+
+    const whatsappMessage = whatsappMessageParts.filter(Boolean).join("\n");
+    const nextWhatsappUrl = `https://wa.me/${waDigits}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formType: "contact",
-          data: {
-            name: form.name.trim(),
-            company: form.company.trim() || undefined,
-            phone: form.phone.replace(/\s+/g, ""),
-            email: form.email.trim(),
-            message: form.message.trim()
-          }
-        })
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        console.error("Contact submit failed:", err);
-        setStatusMessage(
-          typeof err.error === "string"
-            ? err.error
-            : "Something went wrong. Please try again or call us directly."
-        );
-        setStatus("error");
-        return;
+      if (typeof window !== "undefined") {
+        window.open(nextWhatsappUrl, "_blank", "noopener,noreferrer");
       }
-      setStatus("success");
     } catch {
-      setStatus("error");
+      // ignore (popup blocker); link below still works
     }
+
+    setWhatsappUrl(nextWhatsappUrl);
+    setStatus("success");
   };
 
   return (
@@ -135,13 +140,17 @@ export function ContactForm() {
             {status === "submitting" ? "Submitting..." : "Send Message"}
           </Button>
           {status === "success" && (
-            <p className="text-xs text-emerald-400">
-              Thank you. We will revert with details shortly.
-            </p>
-          )}
-          {status === "error" && (
-            <p className="text-xs text-red-400">
-              {statusMessage || "Something went wrong. Please try again or call us directly."}
+            <p className="text-xs text-emerald-700">
+              Continue on WhatsApp to send your request to Perfect RMC.
+              <br />
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline underline-offset-4"
+              >
+                Open WhatsApp
+              </a>
             </p>
           )}
         </div>

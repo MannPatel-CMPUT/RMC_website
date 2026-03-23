@@ -1,30 +1,8 @@
 "use client";
 
-/**
- * Premium header accent: layered transit mixer with rotating drum only.
- *
- * TUNING GUIDE
- * -------------
- * Drum position/size (must match your PNG cutouts):
- *   → Edit `DEFAULT_DRUM_LAYOUT` below, or pass `drumLayout` prop from Hero.
- *
- * Rotation speed:
- *   → `drumDurationSeconds` — seconds per full 360° (continuous) or full cycle (logoPause).
- *   → `drumDurationHoverSeconds` — faster value applied on `:hover` via CSS variables.
- *
- * Animation mode:
- *   → `mode="continuous"` — steady linear spin (realistic mixer feel).
- *   → `mode="logoPause"` — spin then hold so logo is readable; keyframe split in globals.css.
- *
- * Assets (replace with your refined exports):
- *   → /public/images/truck_body_refined.png
- *   → /public/images/mixer_drum_refined.png
- */
-
 import Image from "next/image";
 import { useEffect, useState, type CSSProperties } from "react";
 
-/** Align drum overlay to body PNG (percent of truck canvas). */
 const DEFAULT_DRUM_LAYOUT = {
   left: "30.65%",
   top: "9.78%",
@@ -33,7 +11,6 @@ const DEFAULT_DRUM_LAYOUT = {
   transformOrigin: "49.76% 52.28%"
 } as const;
 
-/** Match exported artboard; update if your refined PNGs use a different canvas. */
 const DEFAULT_ASPECT_RATIO = "496 / 225";
 
 export type MixerAnimationMode = "continuous" | "logoPause";
@@ -48,18 +25,13 @@ export type DrumLayout = {
 
 export type AnimatedMixerTruckProps = {
   className?: string;
-  /** Steady spin vs spin-then-pause for logo readability */
   mode?: MixerAnimationMode;
-  /** Seconds: one full 360° (continuous) or one full cycle including pause (logoPause) */
   drumDurationSeconds?: number;
-  /** Shorter duration while user hovers the truck */
   drumDurationHoverSeconds?: number;
-  /** Canvas aspect ratio as CSS aspect-ratio value */
   aspectRatio?: string;
   bodySrc?: string;
   drumSrc?: string;
   drumLayout?: Partial<DrumLayout>;
-  /** Subtle vertical float on the whole unit */
   enableFloat?: boolean;
 };
 
@@ -69,8 +41,8 @@ export function AnimatedMixerTruck({
   drumDurationSeconds = 14,
   drumDurationHoverSeconds = 9,
   aspectRatio = DEFAULT_ASPECT_RATIO,
-  bodySrc = "/images/truck_body_refined.png",
-  drumSrc = "/images/mixer_drum_refined.png",
+  bodySrc = "/images/truck_body.png",
+  drumSrc = "/images/mixer_drum.png",
   drumLayout,
   enableFloat = true
 }: AnimatedMixerTruckProps) {
@@ -79,17 +51,24 @@ export function AnimatedMixerTruck({
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReduceMotion(mq.matches);
+
     update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", update);
+      return () => mq.removeEventListener("change", update);
+    } else {
+      mq.addListener(update);
+      return () => mq.removeListener(update);
+    }
   }, []);
 
   const layout = { ...DEFAULT_DRUM_LAYOUT, ...drumLayout };
 
-  const cssVars = {
-    "--mixer-drum-duration": `${drumDurationSeconds}s`,
-    "--mixer-drum-duration-hover": `${drumDurationHoverSeconds}s`
-  } as CSSProperties;
+  const cssVars: CSSProperties = {
+    ["--mixer-drum-duration" as string]: `${drumDurationSeconds}s`,
+    ["--mixer-drum-duration-hover" as string]: `${drumDurationHoverSeconds}s`
+  };
 
   const drumAnimClass =
     mode === "continuous"
@@ -102,15 +81,15 @@ export function AnimatedMixerTruck({
       style={cssVars}
       aria-hidden="true"
     >
-      {/* Shell: perspective + drop shadow (premium, not GIF-like) */}
       <div
-        className={`mixer-truck-shell relative mx-auto w-full max-w-full ${enableFloat && !reduceMotion ? "mixer-truck-float" : ""}`}
+        className={`mixer-truck-shell relative mx-auto w-full max-w-full ${
+          enableFloat && !reduceMotion ? "mixer-truck-float" : ""
+        }`}
       >
         <div
           className="mixer-truck-stage relative w-full overflow-visible rounded-sm"
           style={{ aspectRatio }}
         >
-          {/* Subtle ground shadow */}
           <div
             className="pointer-events-none absolute -bottom-1 left-[8%] right-[8%] z-0 h-[18%] rounded-[50%] bg-black/35 blur-md"
             aria-hidden
@@ -119,14 +98,13 @@ export function AnimatedMixerTruck({
           <div className="mixer-truck-tilt relative z-[1] h-full w-full">
             <Image
               src={bodySrc}
-              alt=""
+              alt="Transit mixer truck"
               fill
               sizes="(max-width: 640px) 120px, 200px"
               className="object-contain object-bottom drop-shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
               priority
             />
 
-            {/* Lighting pass: subtle top highlight (illusion of studio light) */}
             <div
               className="pointer-events-none absolute inset-0 z-[2] mix-blend-soft-light"
               style={{
@@ -136,9 +114,8 @@ export function AnimatedMixerTruck({
               aria-hidden
             />
 
-            {/* Drum slot: static tilt only; inner layer spins */}
             <div
-              className="mixer-drum-slot pointer-events-none absolute z-[3]"
+              className="pointer-events-none absolute z-[3]"
               style={{
                 left: layout.left,
                 top: layout.top,
@@ -149,24 +126,25 @@ export function AnimatedMixerTruck({
               }}
             >
               <div
-                className="mixer-drum-tilt relative h-full w-full"
+                className="relative h-full w-full"
                 style={{
                   transform: "rotateX(5deg) rotateY(-2deg)",
                   transformStyle: "preserve-3d"
                 }}
               >
                 <div
-                  className={`mixer-drum-pivot relative h-full w-full ${reduceMotion ? "" : drumAnimClass}`}
+                  className={`relative h-full w-full ${
+                    reduceMotion ? "" : drumAnimClass
+                  }`}
                   style={{
                     transformOrigin: layout.transformOrigin,
-                    // Crisp logo while spinning
                     filter:
                       "drop-shadow(0 2px 4px rgba(0,0,0,0.25)) drop-shadow(0 0 1px rgba(255,255,255,0.15))"
                   }}
                 >
                   <Image
                     src={drumSrc}
-                    alt=""
+                    alt="Rotating mixer drum with company logo"
                     fill
                     sizes="(max-width: 640px) 100px, 160px"
                     className="object-contain"
