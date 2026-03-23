@@ -14,7 +14,10 @@ const heroVariants = {
 
 export function Hero() {
   return (
-    <section className="bg-gradient-to-b from-zinc-100 via-white to-zinc-100 pb-10 pt-16 text-zinc-900 sm:pt-20 lg:pt-24">
+    <section
+      id="home-hero"
+      className="bg-gradient-to-b from-zinc-100 via-white to-zinc-100 pb-10 pt-16 text-zinc-900 sm:pt-20 lg:pt-24"
+    >
       <div className="container-default">
         <motion.div
           className="space-y-8"

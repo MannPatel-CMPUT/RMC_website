@@ -5,6 +5,7 @@ import { services, infrastructureStats, qualityProcessSteps, businessDescription
 import { ConcreteCalculator } from "@/components/home/ConcreteCalculator";
 import { FAQSection } from "@/components/home/FAQSection";
 import { ClientsSection } from "@/components/home/ClientsSection";
+import { MobileSectionNav } from "@/components/home/MobileSectionNav";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <MobileSectionNav />
       <Hero />
 
       {/* Trust stats band */}
@@ -106,7 +108,7 @@ export default function HomePage() {
       </section>
 
       {/* Services */}
-      <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
+      <section id="home-services" className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
         <div className="container-default">
           <SectionHeading
             eyebrow="Services"
@@ -135,7 +137,7 @@ export default function HomePage() {
       </section>
 
       {/* Infrastructure highlight */}
-      <section className="section-padding bg-zinc-50">
+      <section id="home-infrastructure" className="section-padding bg-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div>
             <SectionHeading
@@ -179,7 +181,7 @@ export default function HomePage() {
       </section>
 
       {/* Quality assurance process */}
-      <section className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
+      <section id="home-quality" className="section-padding bg-gradient-to-b from-zinc-100 to-zinc-50">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
           <div>
             <SectionHeading
@@ -215,13 +217,17 @@ export default function HomePage() {
       </section>
 
       {/* Clients */}
-      <ClientsSection />
+      <section id="home-clients">
+        <ClientsSection />
+      </section>
 
       {/* Concrete calculator */}
-      <ConcreteCalculator />
+      <section id="home-calculator">
+        <ConcreteCalculator />
+      </section>
 
       {/* Lead capture */}
-      <section className="section-padding bg-zinc-100">
+      <section id="home-quote" className="section-padding bg-zinc-100">
         <div className="container-default grid gap-10 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)] lg:items-start">
           <div className="space-y-4">
             <SectionHeading
@@ -246,7 +252,9 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <FAQSection />
+      <section id="home-faq">
+        <FAQSection />
+      </section>
     </>
   );
 }
